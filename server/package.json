@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krisnawiraska/WinFitnesProject.git"
+  },
+  "author": "krisna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krisnawiraska/WinFitnesProject/issues"
+  },
+  "homepage": "https://github.com/krisnawiraska/WinFitnesProject#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "knex": "^3.0.1",
+    "pg": "^8.11.3"
+  }
+}
