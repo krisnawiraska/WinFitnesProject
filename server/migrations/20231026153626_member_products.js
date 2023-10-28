@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.increments();
         table.string('name_product');
         table.string('duration');
-        table.integer('price');
+        table.string('price');
         table.timestamp("created_at");
         table.timestamp("updated_at");
     })
