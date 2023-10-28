@@ -6,7 +6,12 @@ routes.get('/', (req,res)=>{
     res.send("masuk ke users")
 })
 
+//customer
 routes.post('/register', userControllers.registerCust)
+routes.post('/login', userControllers.loginCust)
+//admin
+routes.post('/register/admin', userControllers.registerAdmin)
+routes.post('/admin/login', userControllers.loginAdmin)
 
 
 module.exports = routes
