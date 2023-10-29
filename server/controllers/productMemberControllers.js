@@ -48,7 +48,7 @@ class ProducControllers {
                 console.log(resultEdit);
             }else{
                 getStatus=200
-                getMessage=`update ${productId} succes`
+                getMessage=`update id ${productId} succes`
             }
         res.status(getStatus).json(getMessage)
 
