@@ -32,19 +32,26 @@ class ProducControllers {
     static async editDataProduct (req,res){
         const productId = req.params.id
         const { name_product, duration,  price } = req.body
+        const curDateUpdate = new Date()
         let getStatus;
         let getMessage;
         try {
-            if (!productId) {
+            const resultEdit = await db('member_products').where({ id: productId }).update({ 
+                name_product, 
+                duration, 
+                price,
+                updated_at: curDateUpdate 
+            });
+            if (!resultEdit) {
                 getStatus=404
-                getMessage=`${productId} not found`
-            } else {
-                await db('books').where({ id: productId }).update({ name_product, duration, price });
+                getMessage=`id ${productId} not found`
+                console.log(resultEdit);
+            }else{
                 getStatus=200
                 getMessage=`update ${productId} succes`
-             
             }
-            res.status(getStatus).json(getMessage)
+        res.status(getStatus).json(getMessage)
+
         }catch (error) {
             res.status(500).json(error)
         }
