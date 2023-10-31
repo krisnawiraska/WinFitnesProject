@@ -16,36 +16,52 @@ class TransactionsControllers {
     
     static async create(req,res){
 
-        const {user_id, product_id, date_start, date_end, prof_of_payment}= req.body
+        const {user_id, product_id, date_start, prof_of_payment}= req.body
         const statusTrans = 'waiting confirmation'
         const currentDate = new Date()
+        const year = currentDate.getFullYear()
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0') // Bulan dimulai dari 0, jadi perlu ditambahkan 1.
+        const day = currentDate.getDate().toString().padStart(2, '0')
+        
+        const formattedDate = `${year}-${month}-${day}`;
+        const pickDate = date_start
+        
         try {
+            
             let getStatusJson;
             let getMessegeJson;
 
-            const checkProduct = await db ('member_product').where('id'.product_id).first()
-            if (!checkProduct) {
+            const checkProduct = await db ('member_products').where('id',product_id).first()
+            const getDuration = checkProduct.duration
+            const dateEndResult =new Date(date_start)
+            const manipulDuration = parseInt(getDuration)
+            dateEndResult.setDate(dateEndResult.getDate()+manipulDuration)
+            
+            if ( pickDate <= formattedDate) {
+                getStatusJson = 400
+                getMessegeJson = "date invalid"                
+            }else if (!checkProduct) {
                 getStatusJson = 400
                 getMessegeJson = "product not found"
-              
+                
             }else{
                 await db ('transactions_member').insert({
                     user_id,
                     product_id,
                     date_start,
-                    date_end,
+                    date_end:dateEndResult,
                     prof_of_payment,
                     status: statusTrans,
                     created_at: currentDate,
                     updated_at: null
                 })
-                getMessegeJson = 201
+                getStatusJson = 201
                 getMessegeJson = "create succes"
 
             }
-            res.status(getMessegeJson).json({getMessegeJson})
+            res.status(getStatusJson).json({getMessegeJson})
         } catch (error) {
-            
+            res.status(500).json(error)
         }
     }
 }
