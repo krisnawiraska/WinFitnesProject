@@ -5,7 +5,7 @@ class AttandanceControllers{
         res.send('masuk ke att')
     }
     static async addAttadance(req,res){
-        const {user_id, date_attandance} =req.body 
+        const {user_id} =req.body 
         try {
             const getUserId = await db ('users').where('id',user_id).first()
             let currDate = new Date()
@@ -31,7 +31,7 @@ class AttandanceControllers{
             res.status(getStatusAdd).json(getMessageAdd)
             
         } catch (error) {
-            
+            res.status(500).json(error)
         }
     }
 }
