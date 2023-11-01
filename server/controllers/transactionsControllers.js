@@ -5,14 +5,7 @@ class TransactionsControllers {
         res.status(200).json(resultAll)
         console.log(resultAll);
     }
-    // static isAuthenticated(req, res, next) {
-    //     if (req.users) {
-    //         next();
-    //     } else {
-    //       // Pengguna belum login
-    //         res.status(403).json({ message: "Forbidden: User must be logged in" });
-    //     }
-    // }
+
     
     static async create(req,res){
 
