@@ -37,6 +37,10 @@ class TransactionsControllers {
             const dateEndResult =new Date(date_start)
             const manipulDuration = parseInt(getDuration)
             dateEndResult.setDate(dateEndResult.getDate()+manipulDuration)
+
+            const getUser = await db('users').where('id', user_id).first()
+            const getDateStartVal = getUser.date_start_member
+            const getDateEndtVal = getUser.date_end_member
            
             if ( pickDate <= formattedDate) {
                 getStatusJson = 400
@@ -45,6 +49,10 @@ class TransactionsControllers {
                 getStatusJson = 400
                 getMessegeJson = "product not found"           
                 
+            }else if(currentDate >= getDateStartVal && currentDate <= getDateEndtVal){
+                getStatusJson = 400
+                getMessegeJson = `user id ${user_id} is membership`           
+
             }else{
                 await db ('transactions_member').insert({
                     user_id,
