@@ -64,7 +64,7 @@ class AttandanceControllers{
             let getStatusAdd;
             // console.log(getUserId);
             // console.log(date_attandance);
-            if (formattedDate >= formattedDateStart && formattedDate <= formattedDateEnd) {
+            if (formattedDate >= formattedDateStart && formattedDate <= formattedDateEnd && getDateStartMember !== null) {
                 next()
               
             } else {
