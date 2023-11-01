@@ -4,7 +4,7 @@ class AttandanceControllers{
     static get (req,res){
         res.send('masuk ke att')
     }
-    static async addAttadance(req,res){
+    static async checkMembership (req,res,next){
         const {user_id} =req.body 
 
         const currentDate = new Date()
@@ -33,22 +33,38 @@ class AttandanceControllers{
             let getStatusAdd;
             // console.log(getUserId);
             // console.log(date_attandance);
-            if (formattedDate <= formattedDateStart && formattedDate >= formattedDateEnd) {
+            if (formattedDate >= formattedDateStart && formattedDate <= formattedDateEnd) {
+                next()
+              
+            } else {
+                res.status(400).json(`id ${user_id} is non active`)
+            }
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+    static async addAttadance(req,res){
+        const {user_id} =req.body 
+
+        const currentDate = new Date()
+        const year = currentDate.getFullYear()
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0') // Bulan dimulai dari 0, jadi perlu ditambahkan 1.
+        const day = currentDate.getDate().toString().padStart(2, '0')
+        
+        const formattedDate = `${year}-${month}-${day}`
+
+            try {
+                   
                 await db('attandances').insert({
                     user_id,
-                    date_attandance: currentDate,
+                    date_attandance: formattedDate,
                     created_at: currentDate,
                     updated_at: null
     
                 })
-                getStatusAdd = 201
-                getMessageAdd = `id ${user_id} succes attandance`
                 
-            } else {
-                getStatusAdd = 400
-                getMessageAdd = `id ${user_id} is non active`
-            }
-            res.status(getStatusAdd).json(getMessageAdd)
+            res.status(201).json(`id ${user_id} succes attandance`)
             
         } catch (error) {
             res.status(500).json(error)
