@@ -10,7 +10,7 @@ routes.post('/create', transactionsControllers.create)
 
 // routes.post('/create',transactionsControllers.isAuthenticated, transactionsControllers.create)
 
-// routes.patch('/updatestatus/:id', transactionsControllers.updateStatusTrans)
+routes.patch('/updatestatus/:id', transactionsControllers.updateStatus)
 
 
 module.exports = routes

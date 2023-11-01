@@ -25,6 +25,7 @@ class TransactionsControllers {
         
         const formattedDate = `${year}-${month}-${day}`;
         const pickDate = date_start
+    
         
         try {
             
@@ -36,13 +37,13 @@ class TransactionsControllers {
             const dateEndResult =new Date(date_start)
             const manipulDuration = parseInt(getDuration)
             dateEndResult.setDate(dateEndResult.getDate()+manipulDuration)
-            
+           
             if ( pickDate <= formattedDate) {
                 getStatusJson = 400
                 getMessegeJson = "date invalid"                
             }else if (!checkProduct) {
                 getStatusJson = 400
-                getMessegeJson = "product not found"
+                getMessegeJson = "product not found"           
                 
             }else{
                 await db ('transactions_member').insert({
@@ -63,6 +64,36 @@ class TransactionsControllers {
         } catch (error) {
             res.status(500).json(error)
         }
+    }
+    static async updateStatus (req,res){
+        let getStatusUpdate;
+        let getmessageUpdate;
+        let dateUpdate = new Date()
+        const transId = req.params.id
+        const getIdUpdate = await db('transactions_member').where('id', transId).first()
+        const pickStatus = getIdUpdate.status
+        if (pickStatus === "succes" ) {
+            getStatusUpdate = 400
+            getmessageUpdate = `id ${transId} can success`
+        }else{
+            await db('transactions_member').where('id' , transId).update({
+                status: "succes",
+                updated_at: dateUpdate
+            })
+            
+            let getDateStart = getIdUpdate.date_start
+            let getDateEnd = getIdUpdate.date_end
+            const getUserToUpdate = await db('users').where('id', getIdUpdate.user_id).first()
+            await db('users').where('id', getIdUpdate.user_id).update({
+                date_start_member: getDateStart,
+                date_end_member: getDateEnd,
+                updated_at: dateUpdate
+            })
+            getStatusUpdate = 200
+            getmessageUpdate = `id ${transId} transaction success`
+
+        }
+        res.status(getStatusUpdate).json(getmessageUpdate)
     }
 }
 module.exports = TransactionsControllers
