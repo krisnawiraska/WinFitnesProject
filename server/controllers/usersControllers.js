@@ -13,7 +13,6 @@ class UserControllers {
             const hasedPassword = md5(password)
             const dateStart = null
             const dateEnd = null
-            const status = "non_active"
             const role = "customer" 
             const currentDate = new Date()
         
@@ -25,7 +24,6 @@ class UserControllers {
                 password: hasedPassword,
                 date_start_member: dateStart, 
                 date_end_member: dateEnd,  
-                status: status, 
                 role: role,
                 created_at: currentDate,
                 updated_at: currentDate
@@ -49,7 +47,6 @@ class UserControllers {
             const hasedPassword = md5(password)
             const dateStart = null
             const dateEnd = null
-            const status = "active"
             const role = "admin" 
             const currentDate = new Date()
         
@@ -61,7 +58,6 @@ class UserControllers {
                 password: hasedPassword,
                 date_start_member: dateStart, 
                 date_end_member: dateEnd,  
-                status: status, 
                 role: role,
                 created_at: currentDate,
                 updated_at: currentDate
