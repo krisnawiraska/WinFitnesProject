@@ -6,27 +6,47 @@ class AttandanceControllers{
     }
     static async addAttadance(req,res){
         const {user_id} =req.body 
-        try {
+
+        const currentDate = new Date()
+        const year = currentDate.getFullYear()
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0') // Bulan dimulai dari 0, jadi perlu ditambahkan 1.
+        const day = currentDate.getDate().toString().padStart(2, '0')
+        
+        const formattedDate = `${year}-${month}-${day}`
+
+            try {
             const getUserId = await db ('users').where('id',user_id).first()
-            let currDate = new Date()
+            const getDateStartMember = getUserId.date_start_member
+            const yearStart = getDateStartMember.getFullYear()
+            const monthStart = (getDateStartMember.getMonth() + 1).toString().padStart(2, '0') // Bulan dimulai dari 0, jadi perlu ditambahkan 1.
+            const dayStart  = getDateStartMember.getDate().toString().padStart(2, '0')
+            const formattedDateStart = `${yearStart}-${monthStart}-${dayStart}`
+
+            const getDateEnd = getUserId.date_end_member
+            const yearEnd = getDateEnd.getFullYear()
+            const monthEnd = (getDateEnd.getMonth() + 1).toString().padStart(2, '0') // Bulan dimulai dari 0, jadi perlu ditambahkan 1.
+            const dayEnd  = getDateEnd.getDate().toString().padStart(2, '0')
+            const formattedDateEnd = `${yearEnd}-${monthEnd}-${dayEnd}`
+            
+            // console.log(formattedDateStart, formattedDateEnd);
             let getMessageAdd;
             let getStatusAdd;
             // console.log(getUserId);
             // console.log(date_attandance);
-            if (getUserId.status === 'non_active') {
-                getStatusAdd = 400
-                getMessageAdd = `id ${user_id} is non active`
-              
-            } else {
+            if (formattedDate <= formattedDateStart && formattedDate >= formattedDateEnd) {
                 await db('attandances').insert({
                     user_id,
-                    date_attandance: currDate,
-                    created_at: currDate,
+                    date_attandance: currentDate,
+                    created_at: currentDate,
                     updated_at: null
     
                 })
                 getStatusAdd = 201
                 getMessageAdd = `id ${user_id} succes attandance`
+                
+            } else {
+                getStatusAdd = 400
+                getMessageAdd = `id ${user_id} is non active`
             }
             res.status(getStatusAdd).json(getMessageAdd)
             
