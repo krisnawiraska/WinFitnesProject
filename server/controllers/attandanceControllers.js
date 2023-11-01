@@ -1,8 +1,39 @@
 const db = require ("../db")
 
 class AttandanceControllers{
-    static get (req,res){
-        res.send('masuk ke att')
+    static async get (req,res){
+        try {
+            const result =await db('attandances')
+                .join('users','attandances.user_id','=','users.id')
+                .select('attandances.id', 'users.name', 'attandances.date_attandance')
+            
+            res.status(200).json(result)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+
+    }
+    static async getById (req,res){
+        const attId = req.params.id
+        try {
+            let getStatusById;
+            let getMessageById;
+            const resultId = await db('attandances').where('user_id', attId).join('users','attandances.user_id','=','users.id')
+            .select('attandances.id', 'users.name', 'attandances.date_attandance')
+            if(resultId.length === 0){
+                getStatusById = 404
+                getMessageById =`id ${attId} not found`
+            }else{
+                getStatusById = 200
+                getMessageById = resultId
+                
+            }
+            res.status(getStatusById).json(getMessageById)
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
     static async checkMembership (req,res,next){
         const {user_id} =req.body 
