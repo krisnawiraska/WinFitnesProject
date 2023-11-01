@@ -2,6 +2,7 @@ const express = require('express')
 const routes = express.Router()
 const transactionsControllers = require("../controllers/transactionsControllers")
 
+
 // routes.get('/',(req,res)=>{
 //     res.send("masuk transactions")
 // }) 
