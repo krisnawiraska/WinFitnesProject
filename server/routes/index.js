@@ -4,7 +4,6 @@ const userRoutes = require("../routes/userRoutes")
 const productMemberRoutes = require("../routes/productmemberRoutes")
 const attRoutes = require("../routes/attandancesRoutes")
 const transactionsRoutes = require("../routes/transactionsRoutes")
-
 const trainingRoutes = require("../routes/trainingRoutes")
 const trainingRoutesDet = require("../routes/traingDetroutes")
 
