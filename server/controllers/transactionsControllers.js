@@ -122,15 +122,18 @@ class TransactionsControllers {
         }
     }        
     static async updateStatus (req,res){
+        const transId = req.params.id
+        const getIdUpdate = await db('transactions_member').where('id', transId).first()
+        // console.log(get);
+        const pickStatus = getIdUpdate.status
         let getStatusUpdate;
         let getmessageUpdate;
         let dateUpdate = new Date()
-        const transId = req.params.id
-        const getIdUpdate = await db('transactions_member').where('id', transId).first()
-        const pickStatus = getIdUpdate.status
         if (pickStatus === "succes" ) {
             getStatusUpdate = 400
             getmessageUpdate = `id ${transId} can success`
+
+            
         }else{
             await db('transactions_member').where('id' , transId).update({
                 status: "succes",

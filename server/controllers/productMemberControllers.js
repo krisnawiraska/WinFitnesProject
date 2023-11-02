@@ -10,21 +10,32 @@ class ProducControllers {
         }
     }
     static async getDataProduct (req,res){
-
+        const getIdProduct = req.params.id
+        const resultByIdProduct = await db('member_products').where('id', getIdProduct).first()
+        if (!resultByIdProduct) {
+            res.status(404).json(`id ${getIdProduct} not found`)
+        }else{
+            res.status(200).json(resultByIdProduct)
+        }
     }
     static async addProduct (req,res){
         const {name_product, duration, price} = req.body
         try {
-            const currentDate = new Date()
-            const result = await db ('member_products').insert({
-                name_product,
-                duration,
-                price,
-                created_at: currentDate,
-                updated_at: currentDate
-            })
-            
-            res.status(201).json({message: `create ${name_product} succes`})
+            if (!name_product || !duration || !price) {
+                res.status(400).json({message: `field not empty`})
+                
+            }else{
+                const currentDate = new Date()
+                const result = await db ('member_products').insert({
+                    name_product,
+                    duration,
+                    price,
+                    created_at: currentDate,
+                    updated_at: currentDate
+                })
+                
+                res.status(201).json({message: `create ${name_product} succes`})
+            }
         } catch (error) {
             res.status(500).json(error)
         }
@@ -45,7 +56,10 @@ class ProducControllers {
             if (!resultEdit) {
                 getStatus=404
                 getMessage=`id ${productId} not found`
-                console.log(resultEdit);
+
+            }else if (!name_product || !duration || !price){
+                getStatus=404
+                getMessage=`field not empty`
             }else{
                 getStatus=200
                 getMessage=`update id ${productId} succes`
