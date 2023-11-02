@@ -8,6 +8,21 @@ class TraningControllers {
             res.status(500).json(error)
         }
     }
+    static async getById(req,res){
+        const getIdTraning = req.params.id
+
+        try {
+            const resultById = await db('category_traning').where('id', getIdTraning).first()
+            if (!resultById) {
+                res.status(404).json({message : `id ${getIdTraning} not found`})
+            }else{
+                res.status(200).json(resultById)
+            }
+            
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
     static async create (req,res){
         const {name_category_traning } = req.body
         const curDate = new Date()
