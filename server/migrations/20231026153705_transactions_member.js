@@ -5,8 +5,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable('transactions_member',(table) =>{
         table.increments();
-        table.integer("user_id").unsigned().references("id").inTable("users");
-        table.integer("product_id").unsigned().references("id").inTable("member_products");
+        table.integer("user_id").unsigned().references("id").inTable("users").onUpdate('CASCADE').onDelete('CASCADE');
+        table.integer("product_id").unsigned().references("id").inTable("member_products").onUpdate('CASCADE').onDelete('CASCADE');
         table.date("date_start");
         table.date("date_end");
         table.string("prof_of_payment");

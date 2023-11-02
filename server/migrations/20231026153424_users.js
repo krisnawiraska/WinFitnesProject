@@ -12,7 +12,6 @@ exports.up = function(knex) {
         table.string('password');
         table.date('date_start_member');
         table.date('date_end_member');
-        table.enu('status',['active', 'non_active']);
         table.enu('role',['admin', 'customer']);
         table.timestamp("created_at");
         table.timestamp("updated_at");
