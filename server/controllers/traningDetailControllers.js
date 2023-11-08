@@ -49,38 +49,45 @@ class TraningDetailControllers{
         }
     }        
     static async create (req,res) {
-        const {traning_id, vidio} = req.body
-        try {
-            const curDate = new Date()
-            let getStatus;
-            let getMessage;
-            const getTraingId = await db('category_traning').where('id',traning_id).first()
-            if (!vidio) {
+        const traning_id = req.body
+        // console.log("masukkkk");
+        // const training_id = req.params.id
+        const vidio = req.file
+        res.status(201).json(traning_id, vidio)
+
+        
+        // res.status(201).json({datafile: req.file, databody:req.body})
+        // try {
+        //     const curDate = new Date()
+        //     let getStatus;
+        //     let getMessage;
+        //     const getTraingId = await db('category_traning').where('id',traning_id).first()
+        //     if (!vidio) {
     
-                getStatus = 400
-                getMessage = `fild not empty`
+        //         getStatus = 400
+        //         getMessage = `fild not empty`
                 
-            }
-            else if (!getTraingId) {
+        //     }
+        //     else if (!getTraingId) {
     
-                getStatus = 404
-                getMessage = `id ${traning_id} not found`
-            }else{
-                const result = await db('category_traning_detail').insert({
-                    traning_id,
-                    vidio,
-                    created_at: curDate,
-                    updated_at:null
-                })
-                getStatus = 200
-                getMessage = 'succesesful'
+        //         getStatus = 404
+        //         getMessage = `id ${traning_id} not found`
+        //     }else{
+        //         const result = await db('category_traning_detail').insert({
+        //             traning_id,
+        //             vidio,
+        //             created_at: curDate,
+        //             updated_at:null
+        //         })
+        //         getStatus = 200
+        //         getMessage = 'succesesful'
                 
-            }
-            res.status(getStatus).json(getMessage)
+        //     }
+        //     res.status(getStatus).json(getMessage)
             
-        } catch (error) {
-            res.status(500).json(error)
-        }
+        // } catch (error) {
+        //     res.status(500).json(error)
+        // }
     }
     static async edit (req,res) {
         const getIdEdit = req.params.id
