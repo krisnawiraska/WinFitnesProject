@@ -2,8 +2,8 @@ const db = require("../db")
 class TraningControllers {
     static async getAllData (req,res){
         try {
-            const allData = await db('category_traning').select('*')
-            res.status(200).json(allData)
+            const traning = await db('category_traning').select('*')
+            res.render('categori/index', { traning: traning });
         } catch (error) {
             res.status(500).json(error)
         }

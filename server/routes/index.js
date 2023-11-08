@@ -8,7 +8,7 @@ const trainingRoutes = require("../routes/trainingRoutes")
 const trainingRoutesDet = require("../routes/traingDetroutes")
 
 routes.get('/',(req,res)=>{
-    res.send("masuk ke route main")
+    res.render('welcomeUser')
 })
 
 routes.use('/users', userRoutes)
