@@ -3,11 +3,12 @@ const db = require ("../db")
 class AttandanceControllers{
     static async get (req,res){
         try {
-            const result =await db('attandances')
+            const attandance =await db('attandances')
                 .join('users','attandances.user_id','=','users.id')
                 .select('attandances.id', 'users.name', 'attandances.date_attandance')
             
-            res.status(200).json(result)
+                res.render('attandance/index', {attandance: attandance})
+            // res.status(200).json(result)
             
         } catch (error) {
             res.status(500).json(error)

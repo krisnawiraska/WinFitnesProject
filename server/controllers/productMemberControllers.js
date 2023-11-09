@@ -4,7 +4,7 @@ class ProducControllers {
     static async getAllDataProduct (req,res){
         try {
             const products = await db('member_products').select('name_product','duration','price');
-            res.render('products/index', { products: products });
+            res.render('products/index', { products: products })
         } catch (error) {
             res.status(500).json(error)
         }
@@ -18,28 +18,31 @@ class ProducControllers {
 //             res.status(200).json(resultByIdProduct)
 //         }
 //     }
-//     static async addProduct (req,res){
-//         const {name_product, duration, price} = req.body
-//         try {
-//             if (!name_product || !duration || !price) {
-//                 res.status(400).json({message: `field not empty`})
+    static formCreate (req,res){
+        res.render('products/create')
+    }
+    static async addProduct (req,res){
+        const {name_product, duration, price} = req.body
+        try {
+            if (!name_product || !duration || !price) {
+                res.status(400).json({message: `field not empty`})
                 
-//             }else{
-//                 const currentDate = new Date()
-//                 const result = await db ('member_products').insert({
-//                     name_product,
-//                     duration,
-//                     price,
-//                     created_at: currentDate,
-//                     updated_at: currentDate
-//                 })
-                
-//                 res.status(201).json({message: `create ${name_product} succes`})
-//             }
-//         } catch (error) {
-//             res.status(500).json(error)
-//         }
-//     }
+            }else{
+                const currentDate = new Date()
+                const result = await db ('member_products').insert({
+                    name_product,
+                    duration,
+                    price,
+                    created_at: currentDate,
+                    updated_at: currentDate
+                })
+                res.redirect('/products')
+                // res.status(201).json({message: `create ${name_product} succes`})
+            }
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
 //     static async editDataProduct (req,res){
 //         const productId = req.params.id
 //         const { name_product, duration,  price } = req.body

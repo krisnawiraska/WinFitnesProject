@@ -23,6 +23,9 @@ class TraningControllers {
             res.status(500).json(error)
         }
     }
+    static formCreate (req,res){
+        res.render('categori/create')
+    }
     static async create (req,res){
         const {name_category_traning } = req.body
         const curDate = new Date()
@@ -41,7 +44,8 @@ class TraningControllers {
                 getStatusCreate = 201
                 getMessegeCreate = `created ${name_category_traning} succes`
             }
-            res.status(getStatusCreate).json(getMessegeCreate)
+            res.redirect('/tranings')
+            // res.status(getStatusCreate).json(getMessegeCreate)
         } catch (error) {
             res.status(500).json(error)
         }

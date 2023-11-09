@@ -2,11 +2,12 @@ const db = require ("../db")
 class TransactionsControllers {
     static async getAllData(req,res){
         try {
-            const resultAll = await db('transactions_member')
+            const transactions = await db('transactions_member')
                 .join('users', 'transactions_member.user_id', '=', 'users.id' )
                 .join('member_products', 'transactions_member.product_id', '=', 'member_products.id')
-                .select('transactions_member.id', 'users.name', 'member_products.name_product', 'transactions_member.date_start', 'transactions_member.date_end', 'transactions_member.prof_of_payment', 'transactions_member.status' ) 
-            res.status(200).json(resultAll)
+                .select('transactions_member.id', 'users.name', 'member_products.name_product', 'transactions_member.date_start', 'transactions_member.date_end', 'transactions_member.status' ) 
+            res.render('transactions/index', { transactions: transactions });
+            // res.status(200).json(resultAll)
             
         } catch (error) {
             res.status(500).json(error)
