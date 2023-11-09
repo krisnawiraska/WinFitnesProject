@@ -47,73 +47,60 @@ class TraningDetailControllers{
         } catch (error) {
             res.status(500).json(error);
         }
-    }        
-    static async create (req,res) {
-        const traning_id = req.body
-        // console.log("masukkkk");
-        // const training_id = req.params.id
-        const vidio = req.file
-        res.status(201).json(traning_id, vidio)
+    }      
 
-        
-        // res.status(201).json({datafile: req.file, databody:req.body})
-        // try {
-        //     const curDate = new Date()
-        //     let getStatus;
-        //     let getMessage;
-        //     const getTraingId = await db('category_traning').where('id',traning_id).first()
-        //     if (!vidio) {
-    
-        //         getStatus = 400
-        //         getMessage = `fild not empty`
-                
-        //     }
-        //     else if (!getTraingId) {
-    
-        //         getStatus = 404
-        //         getMessage = `id ${traning_id} not found`
-        //     }else{
-        //         const result = await db('category_traning_detail').insert({
-        //             traning_id,
-        //             vidio,
-        //             created_at: curDate,
-        //             updated_at:null
-        //         })
-        //         getStatus = 200
-        //         getMessage = 'succesesful'
-                
-        //     }
-        //     res.status(getStatus).json(getMessage)
+    static async create (req,res) {
+        try {
+            const traning_id = req.body.traning_id
+            const vidio = req.file.path
             
-        // } catch (error) {
-        //     res.status(500).json(error)
-        // }
+            console.log(traning_id)
+            const curDate = new Date()
+            
+            // Pastikan traning_id berupa integer
+            const manupulInt = parseInt(traning_id)
+        
+            console.log(manupulInt)
+        
+            const result = await db('category_traning_detail').insert({
+                traning_id: manupulInt,
+                vidio,
+                created_at: curDate,
+                updated_at: null
+            }).returning('*');
+        
+            res.status(200).json(result)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+        
     }
     static async edit (req,res) {
         const getIdEdit = req.params.id
         try {
-            const {traning_id,vidio} = req.body
-    
-            // let getStatusEdit;
-            // let getMessageEdit;
-            const curDate = new Date()
-            const getDetId = await db('category_traning_detail').where('id',getIdEdit).first()
-            if (!getDetId) {
-                getStatusEdit = 404
-                getMessageEdit = `id ${getDetId}not found`
-            }else{
-                await db('category_traning_detail').update({
-                    traning_id,
-                    vidio,
-                    created_at: curDate,
-                    updated_at: curDate
-                })
-                getStatusEdit = 404
-                getMessageEdit = `id ${getDetId}not found`
-                // console.log("berhasil");
+            const { traning_id } = req.body
+
+        const curDate = new Date();
+        const getDetId = await db('category_traning_detail').where('id', getIdEdit).first()
+
+        if (!getDetId) {
+            res.status(404).json(`id ${getIdEdit} not found`)
+        } else {
+            let updatedData = {
+                traning_id,
+                updated_at: curDate
+            };
+
+            // Check if there's a new video file
+            if (req.file) {
+                const newVidio = req.file.path
+                updatedData = { ...updatedData, vidio: newVidio }
             }
-            
-            res.status(getStatusEdit).json(getMessageEdit)
+
+            await db('category_traning_detail').where('id', getIdEdit).update(updatedData)
+
+            res.status(200).json(`Successfully updated training details with id ${getIdEdit}`)
+        }
             
             
         } catch (error) {

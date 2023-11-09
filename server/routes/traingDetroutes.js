@@ -17,18 +17,21 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
       folder: 'Binar',
-      allowedFormats: ['png', 'jpg']
+      formats: 'mp4',
+      resource_type: 'video'
     }
   });
   
-  const upload = multer({ storage: storage });
-  
+const upload = multer({ storage: storage });
+  // const upload = multer();
+
+  // const storage = new Multer.memoryStorage();
 
 routes.get('/', traningDetailControllers.getAllDataDetail)
 routes.get('/:id', traningDetailControllers.getById)
 routes.get('/one/:id', traningDetailControllers.getOneId)
 routes.post('/detail/create', upload.single('vidio'), traningDetailControllers.create)
-routes.put('/detail/edit/:id', traningDetailControllers.edit)
+routes.put('/detail/edit/:id', upload.single('vidio'),  traningDetailControllers.edit)
 routes.delete('/delete/:id', traningDetailControllers.delete)
 
 module.exports = routes
