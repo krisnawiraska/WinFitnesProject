@@ -1,8 +1,8 @@
 const express = require('express')
 const routes = express.Router()
 const transactionsControllers = require("../controllers/transactionsControllers")
-const methodOverride = require('method-override');
-routes.use(methodOverride('_method'));
+// const methodOverride = require('method-override');
+// routes.use(methodOverride('_method'));
 
 
 // routes.get('/',(req,res)=>{
