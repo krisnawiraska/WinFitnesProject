@@ -10,6 +10,8 @@ const trainingRoutesDet = require("../routes/traingDetroutes")
 const dashboard = require("../controllers/dashboardUser")
 
 routes.get('/', dashboard.getHome)
+routes.get('/vidio/:id', dashboard.getVidio)
+
 
 routes.use('/users', userRoutes)
 routes.use('/transactions', transactionsRoutes)
