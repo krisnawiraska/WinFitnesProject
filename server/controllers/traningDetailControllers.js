@@ -53,18 +53,21 @@ class TraningDetailControllers{
         try {
             const traning_id = req.body.traning_id
             const vidio = req.file.path
+            const{name_vidio, deskripsi} = req.body
             
-            console.log(traning_id)
+            // console.log(traning_id)
             const curDate = new Date()
             
             // Pastikan traning_id berupa integer
             const manupulInt = parseInt(traning_id)
         
-            console.log(manupulInt)
+            // console.log(manupulInt)
         
             const result = await db('category_traning_detail').insert({
                 traning_id: manupulInt,
+                name_vidio,
                 vidio,
+                deskripsi,
                 created_at: curDate,
                 updated_at: null
             }).returning('*');

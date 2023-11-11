@@ -10,11 +10,14 @@ class Dashboard{
         const vidio = await db('category_traning_detail')
             .where('traning_id', categoryId)
             .join('category_traning', 'category_traning_detail.traning_id', '=', 'category_traning.id')
-            .select('category_traning_detail.id', 'category_traning.name_category_traning', 'category_traning_detail.vidio');
+            .select('category_traning_detail.id', 'category_traning.name_category_traning', 'category_traning_detail.name_vidio', 'category_traning_detail.vidio', 'category_traning_detail.deskripsi');
 
         res.render('vidio/vidioCatalog', { vidio });
 
         // res.render('vidio/vidioCatalog');
+    }
+    static admin (req,res){
+        res.render('index');
     }
 }
 module.exports = Dashboard
