@@ -10,17 +10,17 @@
     <div class="sidebar">
         <h2>Admin Menu</h2>
         <ul>
-            <li><a href="#">Product</a></li>
-            <li><a href="#">Categori</a></li>
-            <li><a href="#">Vidio</a></li>
-            <li><a href="#">Transaksi</a></li>
-            <li><a href="#">Attandance</a></li>
+            <li><a href="/products">Product</a></li>
+            <li><a href="/tranings">Categori</a></li>
+            <li><a href="">Vidio</a></li>
+            <li><a href="/transactions">Transaksi</a></li>
+            <li><a href="/attandance">Attandance</a></li>
         </ul>
     </div>
     <div class="content">
         
-        <h1>Transaction Member</h1>
-        <a href='' class="btn btn-primary">Create</a>
+        <h1>Attandance Member</h1>
+        <a href='/attandance/formcreate' class="btn btn-primary">Create</a>
         <br>
         <table class="data-table">
             <thead>
@@ -29,7 +29,7 @@
                     <th>ID</th>
                     <th>Name Member</th>
                     <th>Date Attandance</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -39,9 +39,9 @@
                     <td><%= attandance.id %></td>
                     <td><%= attandance.name %></td>
                     <td><%= attandance.date_attandance %></td>
-                    <td>
+                    <!-- <td>
                         <button type="button" class="btn btn-primary" href="">Detail</button>
-                    </td>
+                    </td> -->
                   </tr>
                 <% }); %>
                 </tbody>

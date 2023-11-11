@@ -20,7 +20,8 @@ class AttandanceControllers{
         try {
             let getStatusById;
             let getMessageById;
-            const resultId = await db('attandances').where('user_id', attId).join('users','attandances.user_id','=','users.id')
+            const resultId = await db('attandances').where('user_id', attId)
+            .join('users','attandances.user_id','=','users.id')
             .select('attandances.id', 'users.name', 'attandances.date_attandance')
             if(resultId.length === 0){
                 getStatusById = 404
@@ -35,6 +36,9 @@ class AttandanceControllers{
         } catch (error) {
             res.status(500).json(error)
         }
+    }
+    static formCreate (req,res){
+        res.render('attandance/create')
     }
     static async checkMembership (req,res,next){
         const { user_id } = req.body;
@@ -93,8 +97,9 @@ class AttandanceControllers{
                     updated_at: null
     
                 })
+            res.redirect('/attandance')
                 
-            res.status(201).json(`id ${user_id} succes attandance`)
+            // res.status(201).json(`id ${user_id} succes attandance`)
             
         } catch (error) {
             res.status(500).json(error)

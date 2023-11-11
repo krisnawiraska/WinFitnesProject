@@ -7,9 +7,9 @@ const transactionsRoutes = require("../routes/transactionsRoutes")
 const trainingRoutes = require("../routes/trainingRoutes")
 const trainingRoutesDet = require("../routes/traingDetroutes")
 
-routes.get('/',(req,res)=>{
-    res.render('welcomeUser')
-})
+const dashboard = require("../controllers/dashboardUser")
+
+routes.get('/', dashboard.getHome)
 
 routes.use('/users', userRoutes)
 routes.use('/transactions', transactionsRoutes)

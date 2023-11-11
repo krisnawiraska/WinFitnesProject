@@ -5,6 +5,7 @@ const routes = require("./routes")
 const path = require('path')
 
 
+
 app.set('view engine', 'ejs'); // Mengatur EJS sebagai view engine
 app.set('views', path.join(__dirname, 'views'));
 

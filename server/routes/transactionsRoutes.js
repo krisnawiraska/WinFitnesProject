@@ -1,6 +1,8 @@
 const express = require('express')
 const routes = express.Router()
 const transactionsControllers = require("../controllers/transactionsControllers")
+const methodOverride = require('method-override');
+routes.use(methodOverride('_method'));
 
 
 // routes.get('/',(req,res)=>{
@@ -8,7 +10,7 @@ const transactionsControllers = require("../controllers/transactionsControllers"
 // }) 
 routes.get('/',transactionsControllers.getAllData)
 routes.get('/user/:id', transactionsControllers.getByIdUser)
-routes.get('/:id', transactionsControllers.getById)
+routes.get('/one/:id', transactionsControllers.getById)
 routes.post('/create', transactionsControllers.create)
 
 // routes.post('/create',transactionsControllers.isAuthenticated, transactionsControllers.create)

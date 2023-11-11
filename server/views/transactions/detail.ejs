@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+    <link href="/css/admin.css" rel="stylesheet" type="text/css" />
+    <link href="path-ke-bootstrap.css" rel="stylesheet" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Admin Menu</h2>
+      <ul>
+        <li><a href="/products">Product</a></li>
+        <li><a href="/tranings">Categori</a></li>
+        <li><a href="">Vidio</a></li>
+        <li><a href="/transactions">Transaksi</a></li>
+        <li><a href="/attandance">Attandance</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <form action="/transactions/update/<%= transaction.id %>" method="PATCH">
+        <h1>Detail Transaction</h1>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">ID</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="id"
+              name="id"
+              class="form-control"
+              value="<%= transaction.id %>"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">User Id</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="user_id"
+              name="user_id"
+              class="form-control"
+              value="<%= transaction.user_id %>"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Products Id</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="product_id"
+              name="product_id"
+              class="form-control"
+              value="<%= transaction.product_id %>"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Date Start</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="date_start"
+              name="date_start"
+              class="form-control"
+              value="<%= transaction.date_start %>"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Date End</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="user_id"
+              name="user_id"
+              class="form-control"
+              value="<%= transaction.user_id %>"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Prof Of Payment</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              id="prof_of_payment"
+              name="prof_of_payment"
+              class="form-control"
+              value="<%= transaction.prof_of_payment %>"
+              readonly
+            />
+        
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                id="status"
+                name="status"
+                class="form-control"
+                value="<%= transaction.status %>"
+                readonly
+              />
+            </div>
+        </div>
+ 
+        <button type="submit" class="btn btn-primary">Confirmation</button>
+      </form>
+    </div>
+  </body>
+</html>

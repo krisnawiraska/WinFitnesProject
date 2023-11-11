@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attandance</title>
+  <link href="/css/admin.css" rel="stylesheet" type="text/css">
+  <link href="path-ke-bootstrap.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Admin Menu</h2>
+        <ul>
+            <li><a href="/products">Product</a></li>
+            <li><a href="/tranings">Categori</a></li>
+            <li><a href="">Vidio</a></li>
+            <li><a href="/transactions">Transaksi</a></li>
+            <li><a href="/attandance">Attandance</a></li>
+        </ul>
+    </div>
+    <div class="content">   
+       <form action="/attandance/add" method="POST">
+            <h1>ATTENDANCE</h1>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Id User</label>
+                <div class="col-sm-10">
+                    <input type="number" id="user_id" name="user_id" class="form-control" placeholder="Id User" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Attendance</button>
+       </form>
+       <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Get the form data
+            const formData = new FormData(event.target);
+
+            // Send a POST request to the server
+            fetch("/attandance/add", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display an alert based on the response
+                alert(data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                // Display an error alert if the request fails
+                alert("Error: Something went wrong");
+            });
+        }
+        </script>
+    </div>
+</body>
+</html>

@@ -50,7 +50,8 @@ class TransactionsControllers {
                 getStatusByTrans = 200
                 getMessegeByTrans = resultByIdTrans    
             }
-            res.status(getStatusByTrans).json(getMessegeByTrans)
+            res.render('transactions/detail', { transaction: resultByIdTrans });
+            // res.status(getStatusByTrans).json(getMessegeByTrans)
             
         } catch (error) {
             res.status(500).json(error)
