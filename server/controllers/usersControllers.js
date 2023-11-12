@@ -1,6 +1,12 @@
 const md5 = require('md5')
 const db = require ("../db")
 class UserControllers {
+    static getForm (req,res){
+        res.render('user/register')
+    }
+    static getLogin (req,res){
+        res.render('user/login')
+    }
     static async registerCust (req,res) {
         const { 
             name, 
@@ -28,8 +34,10 @@ class UserControllers {
                 created_at: currentDate,
                 updated_at: currentDate
             })
-                    
-            res.status(201).json("created Succes")            
+             
+            res.redirect('/users/formlogin')
+
+            // res.status(201).json("created Succes")            
         } catch (error) {
             res.status(500).json(error)
         }

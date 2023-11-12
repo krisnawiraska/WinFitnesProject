@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Products</title>
-  <link href="/css/admin.css" rel="stylesheet" type="text/css">
-  <link href="path-ke-bootstrap.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="sidebar">
-        <h2>Admin Menu</h2>
-        <ul>
-            <li><a href="/products">Product</a></li>
-            <li><a href="/tranings">Categori</a></li>
-            <li><a href="">Vidio</a></li>
-            <li><a href="/transactions">Transaksi</a></li>
-            <li><a href="/attandance">Attandance</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        
+<%- include('../templeteAdmin/sidebar') %>
+<body>  
+    <div class="content">       
         <h1>Product Member</h1>
         <a href='/products/formcreate' class="btn btn-primary">Create</a>
         <br>
@@ -49,4 +31,4 @@
         </table>
     </div>
 </body>
-</html>
+

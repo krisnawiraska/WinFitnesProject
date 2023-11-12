@@ -7,6 +7,10 @@ routes.get('/', (req,res)=>{
 })
 
 //customer
+routes.get('/formregister',  userControllers.getForm)
+routes.get('/formlogin',  userControllers.getLogin)
+
+
 routes.post('/register', userControllers.registerCust)
 routes.post('/login', userControllers.loginCust)
 //admin
