@@ -6,7 +6,9 @@ exports.up = function(knex) {
     return knex.schema.createTable('category_traning_detail', (table)=>{
         table.increments();
         table.integer("traning_id").unsigned().references("id").inTable("category_traning").onUpdate('CASCADE').onDelete('CASCADE');
-        table.string("vidio")
+        table.string("name_vidio")
+        table.text("vidio")
+        table.string("deskripsi")
         table.timestamp("created_at");
         table.timestamp("updated_at");
     })
