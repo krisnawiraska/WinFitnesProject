@@ -1,5 +1,23 @@
 const db = require("../db")
 class TraningDetailControllers{
+
+    static async getForm(req,res){
+        try {
+            const vidios = await db('category_traning_detail')
+                .join('category_traning', 'category_traning_detail.traning_id', '=', 'category_traning.id')
+                .select('category_traning_detail.id','category_traning_detail.name_vidio', 'category_traning_detail.vidio')
+            
+                res.render('vidio/index',{vidios})
+            // res.status(200).json(getAllData)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    
+    }
+    static async formCreate (req,res){
+        const getId = await db ('category_traning').select('id','name_category_traning')
+        res.render('vidio/create', {getId})
+    }
     static async getAllDataDetail(req, res) {
         // res.send("masuk ke get")
         try {
@@ -58,8 +76,8 @@ class TraningDetailControllers{
             // console.log(traning_id)
             const curDate = new Date()
             
-            // Pastikan traning_id berupa integer
-            const manupulInt = parseInt(traning_id)
+            const manupulInt = parseInt(traning_id, 10);
+
         
             // console.log(manupulInt)
         

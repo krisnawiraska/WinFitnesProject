@@ -1,40 +1,19 @@
 <%- include('../templeteAdmin/sidebar') %>
 <body>
-    <div class="content">   
-       <form action="/attandance/add" method="POST">
-            <h1>ATTENDANCE</h1>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Id User</label>
-                <div class="col-sm-10">
-                    <input type="number" id="user_id" name="user_id" class="form-control" placeholder="Id User" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Attendance</button>
-       </form>
-       <script>
-        function handleFormSubmit(event) {
-            event.preventDefault();
+    <div class="content">
+        <h1>ATTENDANCE</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="/attandance/add" method="POST">
+                      <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Id User</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="user_id" name="user_id" class="form-control" placeholder="Id User" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Attendance</button>
+            </form>
 
-            // Get the form data
-            const formData = new FormData(event.target);
-
-            // Send a POST request to the server
-            fetch("/attandance/add", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Display an alert based on the response
-                alert(data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                // Display an error alert if the request fails
-                alert("Error: Something went wrong");
-            });
-        }
-        </script>
     </div>
 </body>
 

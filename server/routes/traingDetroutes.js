@@ -26,6 +26,8 @@ const upload = multer({ storage: storage });
   // const upload = multer();
 
   // const storage = new Multer.memoryStorage();
+routes.get('/index', traningDetailControllers.getForm)
+routes.get('/formcreate', traningDetailControllers.formCreate)
 
 routes.get('/', traningDetailControllers.getAllDataDetail)
 routes.get('/:id', traningDetailControllers.getById)

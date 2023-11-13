@@ -1,31 +1,33 @@
 <%- include('../templeteAdmin/sidebar') %>
 <body>
     <div class="content">
-        <h1 class="card-title">CREATE PRODUCT MEMBER</h1>
+        <h1 class="card-title">EDIT PRODUCT MEMBER</h1>
         <div class="card">
           <div class="card-body">  
-            <form action="/products/create" method="POST">
+            <form action="/products/edit/<%= resultByIdProduct.id %>" method="POST">
                     <!-- <h1>CREATE PRODUCT MEMBER</h1> -->
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Name Product</label>
                         <div class="col-sm-10">
-                            <input type="text" id="name_product" name="name_product" class="form-control"  placeholder="Product Name" required>
+                            <input type="text" id="name_product" name="name_product" class="form-control" value="<%= resultByIdProduct.name_product %>" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Duration</label>
                         <div class="col-sm-10">
-                            <input type="number" id="duration" name="duration" class="form-control" placeholder="Duration" required>
+                            <input type="number" id="duration" name="duration" class="form-control" value="<%= resultByIdProduct.duration %>" required>
                         </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Price</label>
                     <div class="col-sm-10">
-                        <input type="number" id="price" name="price"  class="form-control" placeholder="Price" required>
+                        <input type="number" id="price" name="price"  class="form-control" value="<%= resultByIdProduct.price %>" required>
                     </div>
                 </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
             </form>
+        </div>
     </div>
 </body>
 

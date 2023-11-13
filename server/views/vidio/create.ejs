@@ -1,0 +1,39 @@
+<%- include('../templeteAdmin/sidebar') %>
+<body>
+
+    <div class="content">
+        <h1>CREATE CATEGORY TRAINING</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="/det/detail/create" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Kategori</label>
+                    <select class="form-select" aria-label="Default select example" name="category_id">
+                        <% getId.forEach(category => { %>
+                            <option value="<%= category.id %>"><%= category.id %> - <%= category.name_category_traning %></option>
+                        <% }); %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Name Vidio</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="name_vidio" name="name_vidio" class="form-control" placeholder="Vidio Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vidio" class="col-sm-2 col-form-label">Upload Video</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="vidio" name="vidio" accept="video/*" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-form-label">Deskripsi</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="deskripsi" name="deskripsi" class="form-control" placeholder="Deskripsi" required>
+                    </div>
+                </div>
+                <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</body>

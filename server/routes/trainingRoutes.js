@@ -8,11 +8,12 @@ const traningControllers = require('../controllers/traningControllers')
 // })
 
 routes.get('/', traningControllers.getAllData)
-// routes.get('/:id', traningControllers.getById)
+// routes.get('one/:id', traningControllers.getById)
 
 routes.get('/formcreate', traningControllers.formCreate)
 routes.post('/create', traningControllers.create)
-routes.patch('/edit/:id', traningControllers.edit)
+routes.get('/one/:id', traningControllers.getById)
+routes.post('/edit/:id', traningControllers.edit)
 routes.delete('/delete/:id', traningControllers.delete)
 
 // routes detail

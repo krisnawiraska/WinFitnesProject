@@ -1,17 +1,19 @@
 <%- include('../templeteAdmin/sidebar') %>
 <body>
 
-    <div class="content">   
-       <form action="/tranings/create" method="POST">
-            <h1>CREATE CATEGORI TRANING</h1>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name Product</label>
-                <div class="col-sm-10">
-                    <input type="text" id="name_category_traning" name="name_category_traning" class="form-control"  placeholder="Categori Name" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-       </form>
+    <div class="content">
+        <h1>CREATE CATEGORI TRANING</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="/tranings/create" method="POST">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Name Product</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="name_category_traning" name="name_category_traning" class="form-control"  placeholder="Categori Name" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+            </form>
     </div>
 </body>
 

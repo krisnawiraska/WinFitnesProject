@@ -1,0 +1,19 @@
+<%- include('../templeteAdmin/sidebar') %>
+<body>
+
+    <div class="content">
+        <h1>UPDATE CATEGORI TRANING</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="/tranings/edit/<%= resultById.id %>" method="POST">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Categori Trainingt</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="name_category_traning" name="name_category_traning" class="form-control"  value="<%= resultById.name_category_traning %>" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+    </div>
+</body>
+

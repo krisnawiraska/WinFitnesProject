@@ -154,7 +154,8 @@ class TransactionsControllers {
             getmessageUpdate = `id ${transId} transaction success`
 
         }
-        res.status(getStatusUpdate).json(getmessageUpdate)
+        res.redirect('/transactions')
+        // res.status(getStatusUpdate).json(getmessageUpdate)
     }
 }
 module.exports = TransactionsControllers

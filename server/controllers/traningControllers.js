@@ -16,7 +16,8 @@ class TraningControllers {
             if (!resultById) {
                 res.status(404).json({message : `id ${getIdTraning} not found`})
             }else{
-                res.status(200).json(resultById)
+                res.render('categori/edit', {resultById})
+                // res.status(200).json(resultById)
             }
             
         } catch (error) {
@@ -68,7 +69,8 @@ class TraningControllers {
                 getStatusEdit = 201
                 getMessegeEdit = `update id ${traning_id} success`              
             }
-            res.status(getStatusEdit).json(getMessegeEdit)
+            res.redirect('/tranings')
+            // res.status(getStatusEdit).json(getMessegeEdit)
 
         } catch (error) {
             res.status(500).json(error)
