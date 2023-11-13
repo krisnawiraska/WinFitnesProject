@@ -7,41 +7,51 @@ class UserControllers {
     static getLogin (req,res){
         res.render('user/login')
     }
-    static async registerCust (req,res) {
+    static async registerCust(req, res) {
         const { 
             name, 
             no_hp, 
             address, 
             email, 
             password, 
-        } = req.body
+        } = req.body;
+    
         try {
-            const hasedPassword = md5(password)
-            const dateStart = null
-            const dateEnd = null
-            const role = "customer" 
-            const currentDate = new Date()
-        
+            // Cek apakah email sudah ada dalam database
+            const existingUser = await db('users').where({ email }).first();
+    
+            if (existingUser) {
+                // Email sudah ada, kirim respons kesalahan
+                return res.status(400).json("Email sudah digunakan. Silakan gunakan email lain.");
+            }
+    
+            // Email belum ada, lanjutkan dengan proses registrasi
+            const hashedPassword = md5(password);
+            const dateStart = null;
+            const dateEnd = null;
+            const role = "customer"; 
+            const currentDate = new Date();
+    
             await db('users').insert({
                 name,
                 no_hp,
                 address,
                 email,
-                password: hasedPassword,
+                password: hashedPassword,
                 date_start_member: dateStart, 
                 date_end_member: dateEnd,  
-                role: role,
+                role,
                 created_at: currentDate,
                 updated_at: currentDate
-            })
-             
-            res.redirect('/users/formlogin')
-
-            // res.status(201).json("created Succes")            
+            });
+    
+            res.redirect('/users/formlogin');
+            // res.status(201).json("created Succes");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     }
+    
 
     static async registerAdmin (req,res) {
         const { 

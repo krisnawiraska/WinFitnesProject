@@ -3,6 +3,20 @@ const app = express()
 const port = process.env.PORT || 3000
 const routes = require("./routes")
 const path = require('path')
+const session = require('express-session');
+
+// app.use(
+//     session({
+//       secret: process.env.YOUR_SECRET_KEY,
+//       resave: false,
+//       saveUninitialized: false,
+//       cookie: {
+//         secure: false,
+//         maxAge: 1000 * 60 * 60 * 24
+//       }
+//     })
+// );
+
 
 
 
