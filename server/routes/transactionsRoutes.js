@@ -8,6 +8,9 @@ const transactionsControllers = require("../controllers/transactionsControllers"
 // routes.get('/',(req,res)=>{
 //     res.send("masuk transactions")
 // }) 
+routes.get('/transactionBy/:id', transactionsControllers.formCreateById)
+routes.get('/transactionuser', transactionsControllers.formCreate)
+
 routes.get('/',transactionsControllers.getAllData)
 routes.get('/user/:id', transactionsControllers.getByIdUser)
 routes.get('/one/:id', transactionsControllers.getById)

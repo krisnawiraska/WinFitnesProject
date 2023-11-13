@@ -104,7 +104,8 @@ class UserControllers {
                 responseStatus = 200
                 responseMessage = `welcome ${email}`                               
             }
-            res.status(responseStatus).json(responseMessage)
+            res.redirect('/')
+            // res.status(responseStatus).json(responseMessage)
         } catch (error) {
             res.status(500).json(error)
         }
@@ -126,7 +127,8 @@ class UserControllers {
                 responseStatus = 200
                 responseMessage = `welcome ${email}`                               
             }
-            res.status(responseStatus).json(responseMessage)
+            res.redirect('/')
+
         } catch (error) {
             res.status(500).json(error)
         }

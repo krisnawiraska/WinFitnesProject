@@ -1,5 +1,14 @@
 const db = require ("../db")
 class TransactionsControllers {
+    static async formCreateById (req,res){
+        const reqIdProduct = req.params.id
+        const getId = await db('member_products').where('id', reqIdProduct).select('id')
+        res.render('createTrans', {getId})
+    }
+    static async formCreate (req,res){
+
+        res.render('transactions/create')
+    }
     static async getAllData(req,res){
         try {
             const transactions = await db('transactions_member')
@@ -108,7 +117,7 @@ class TransactionsControllers {
                         product_id,
                         date_start,
                         date_end: dateEndResult,
-                        prof_of_payment,
+                        prof_of_payment: null,
                         status: statusTrans,
                         created_at: currentDate,
                         updated_at: null
@@ -117,8 +126,8 @@ class TransactionsControllers {
                     getMessegeJson = "create success";
                 }
             }
-        
-            res.status(getStatusJson).json({ message: getMessegeJson });
+            res.redirect('/')
+            // res.status(getStatusJson).json({ message: getMessegeJson });
         } catch (error) {
             res.status(500).json(error);
         }

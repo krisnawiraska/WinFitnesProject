@@ -12,11 +12,13 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    overflow-y: auto; /* Enable scrolling if the content is too long */
 }
 
 .sidebar h2 {
     text-align: center;
     padding: 20px 0;
+    margin: 0;
 }
 
 .sidebar ul {
@@ -33,6 +35,12 @@ body {
     color: #fff;
     text-decoration: none;
     display: block;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555; /* Change color on hover */
 }
 
 .content {
@@ -42,16 +50,29 @@ body {
 
 .data-table {
     width: 100%;
+    margin-top: 10px;
     border-collapse: collapse;
 }
 
-.data-table th, .data-table td {
+.data-table th,
+.data-table td {
     border: 1px solid #333;
     padding: 8px;
     text-align: left;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow to table cells */
 }
 
 .data-table th {
     background-color: #444;
     color: #fff;
+}
+
+.data-table td:first-child {
+    background-color: transparent; /* No background color for the first column */
+    box-shadow: none; /* No shadow for the first column */
+}
+
+.data-table tr:hover td {
+    background-color: #c9c9c9; /* Hover effect for table rows */
+    color: #000000;
 }
